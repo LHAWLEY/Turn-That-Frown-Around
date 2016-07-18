@@ -1,0 +1,51 @@
+iframe {
+  width: 560;
+  height: 315;
+}
+
+body {
+  background-color: #D3D3D3;
+  color: #666666;
+}
+
+a:link {
+  color: #666666;
+}
+
+a:visited {
+  color: #666666;
+}
+
+h1 {
+  color: #1fa4a3;
+  font-size: 50px;
+  text-align: center;
+}
+
+.video-boxes {
+  text-align: center;
+}
+
+#nav-bar {
+  background-color: white;
+  height: 100px;
+  text-align: right;
+}
+
+div a {
+  padding: 14px 16px;;
+}
+
+form textarea {
+  width: 400px;
+  height: 150px;
+}
+
+form {
+  text-align: center
+}
+
+.input-field {
+  width: 350px;
+  height: 30px;
+}

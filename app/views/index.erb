@@ -1,0 +1,46 @@
+<div id="nav-bar"><% if !logged_in? %>
+  <a class="nav-link" href="/sessions/new">LOG IN </a>
+  <a class="nav-link" href="/users/new">REGISTER</a>
+<% end %>
+
+<% if current_user %>
+  <a class="nav-link" href="/sessions/delete">LOGOUT</a>
+  <a class="nav-link" href="/videos/new">UPLOAD A VIDEO</a>
+  <img src="http://www.gravatar.com/avatar/<%= current_user.hash%>" />
+<% end %>
+</div>
+
+<h1>TURN THAT FROWN AROUND</h1>
+  <ul class="video-boxes">
+    <% @videos.each do |video| %>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.link %>" frameborder="2"></iframe></br>
+
+      <% if current_user %>
+        <div class="vote-container">
+          <% if current_user.voted_for?(video) %>
+            <a class="remove_vote" href="/votes/delete" data-video_id="<%= video.id%>">REMOVE VOTE</a>
+          <% else %>
+            <a class="vote_link" href="/votes" data-video_id="<%= video.id %>">VOTE</a>
+         <% end %>
+         <span class="tally"><%= video.votes.count %></span>
+        </div>
+      <% end %>
+
+        <div class="comments_container">
+          <% if video.comments.count > 3 %>
+             <a class="list_comments" href="/videos/<%=video.id%>/comments">SHOW ALL COMMENTS</a>
+          <% end %>
+
+          <% video.comments.last(3).each do |comment| %>
+           <p><%=comment.body%></p></br>
+          <%end%>
+          <% if current_user %>
+            <form class="comment_form" action="/comments" method="post">
+              <input name="comment[video_id]" type="hidden" value="<%=video.id%>">
+              <textarea name="comment[body]" placeholder="comment"></textarea></br>
+              <input type="submit" value="SUBMIT">
+            </form>
+          <% end %>
+        </div>
+    <% end %>
+  </ul>
